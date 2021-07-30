@@ -1,4 +1,4 @@
-import {output, helloWorld, Person} from "learningnpm-hello-world"
+import {output, helloWorld, Person, ConnectionManager} from "learningnpm-hello-world1"
 
 output();
 
