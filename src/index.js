@@ -11,6 +11,8 @@ import {SmartPeer} from "smartpeer"
 
     simplePeer.registerCallback("data",printData);
 
-    simplePeer.registerCallback("close",printData);
+    simplePeer.on("open", function(data){
+        console.log(data);
+    })
 
-    console.log(simplePeer.callbackFunctions);
+    simplePeer.registerCallback("close",printData);

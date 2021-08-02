@@ -9,4 +9,10 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'docs'),
   },
+
+  devServer: {
+    contentBase: path.join(__dirname, 'docs'),
+    compress: true,
+    port: 9000,
+  },
 };
