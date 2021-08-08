@@ -107,25 +107,24 @@ import Peer from 'peerjs';
 });
 
 var joystick = manager.get(manager.id);
-var joystickX = joystick.position.x - 50;
-var joystickY = joystick.position.y;
 
+joystick.on("start", function (evt, data) {
+    var message = {"position": data.position, "direction": data.direction, "angle": data.angle, "force": data.force, "distance" : data.distance};
+    conn.send(['start',message]);
+})
 
 joystick.on("move", function (evt, data) {
     
-        if (Math.abs(data.position.y - joystickY+50)<5){
-            var angle = "up";
-            
-        }
-        else if(Math.abs(data.position.y - joystickY-50)<5){
-            var angle = "down";
-            
-        }
-        else {
-            var angle = "straight";
-        }
-        var coordinates = [((data.position.x - joystickX)/100), angle];
-        conn.send(coordinates);
+        var message = {"position": data.position, "direction": data.direction, "angle": data.angle, "force": data.force, "distance" : data.distance};
+        //var message = [data.direction.x, data.direction.y];
+        //message[position] = {x:joystick.position.x, y:joystick.position.y} 
+        console.log(message);
+        conn.send(['move', message]);
 
     
+})
+
+joystick.on("end", function (evt, data) {
+    var message = {"position": data.position, "direction": data.direction, "angle": data.angle, "force": data.force, "distance" : data.distance};
+    conn.send(['end',message]);
 })
