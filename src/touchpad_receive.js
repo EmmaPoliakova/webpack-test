@@ -1,14 +1,17 @@
-import {TouchPadSmartPeer} from "smartpeer"
+import {TouchPadSmartController} from "smartcontroller"
 
     var canvas = document.getElementById("coordinateCanvas")
     var ctx = canvas.getContext("2d");
     
     var colours = ["red", "yellow", "green", "blue", "orange"]
-
-    const simplePeer = new TouchPadSmartPeer('123456');
+    var peers = {};
+    var i = 0;
+    const simplePeer = new TouchPadSmartController('123456');
     simplePeer.createQrCode('https://emmapoliakova.github.io/webpack-test/touchpad.html', 'canvas');
     
     simplePeer.on("connection", function(data){
+        peers[data] = i;
+        i += 1;
         processData();
     })
 
@@ -18,7 +21,7 @@ import {TouchPadSmartPeer} from "smartpeer"
 
         for (var key in simplePeer.touchpadList){
             var touchpad = simplePeer.touchpadList[key]
-            ctx.fillStyle = colours[touchpad.playerNum];
+            ctx.fillStyle = colours[peers[touchpad.peer.peer]];
 
             if (touchpad.isActive){  
                 for (var key in touchpad.state){
