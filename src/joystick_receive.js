@@ -8,11 +8,14 @@ import {JoystickSmartController} from "smartcontroller"
     var i = 0;
 
     const simplePeer = new JoystickSmartController('123456');
-    simplePeer.createQrCode('https://emmapoliakova.github.io/webpack-test/joystick.html', 'canvas');
+    simplePeer.createQrCode('https://emmapoliakova.github.io/webpack-test/joystick.html', 'qrcode', 150, 150, '1');
+
+
     
    
     simplePeer.on("connection", function(data){
-        console.log('hello')
+        data.send('hello')
+
         peers[data] = i;
         i += 1;
         processData();
@@ -22,9 +25,11 @@ import {JoystickSmartController} from "smartcontroller"
     function processData(){
         
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+   
         for (var key in simplePeer.joystickList){
             
             var joystick = simplePeer.joystickList[key]
+
 
             if (joystick.isActive){
                 ctx.beginPath();
