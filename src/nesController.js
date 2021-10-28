@@ -5,12 +5,12 @@ var phone = new SmartPhoneController();
 window.press = function (event, id){
     event.preventDefault();
     console.log(id)
-    phone.connection.send({type:"user", data:{state:"s", button: id}});
+    phone.connection.send({type:"user", data:{state:"start", button: id}});
 }
 
 window.release = function(event, id){
     event.preventDefault();
-    phone.connection.send({type:"user", data:{state:"r", button: id}});
+    phone.connection.send({type:"user", data:{state:"end", button: id}});
 }
 
 /* Get the documentElement (<html>) to display the page in fullscreen */

@@ -6,7 +6,8 @@ module.exports = {
     joystick: './src/joystick.js',
     touchpad_receive: './src/touchpad_receive.js',
     touchpad: './src/touchpad.js',
-    nesController: './src/nesController.js'
+    nesController: './src/nesController.js',
+    controller_receive: './src/controller_receive.js'
 
   },
   output: {
