@@ -15,17 +15,17 @@ var joystick = manager.get(manager.id);
 
 joystick.on("start", function (evt, data) {
     var message = {"position": data.position, "direction": data.direction, "angle": data.angle, "force": data.force, "distance" : data.distance};
-    phone.connection.send({'state':'start', 'joystick':message});
+    phone.connection.send({type:"user", data:{state:'start', 'joystick':message}});
 })
 
 joystick.on("move", function (evt, data) {
     
         var message = {"position": data.position, "direction": data.direction, "angle": data.angle, "force": data.force, "distance" : data.distance};
-        phone.connection.send({'state':'move', 'joystick':message});
+        phone.connection.send({type:"user", data:{state:'move', 'joystick':message}});
   
 })
 
 joystick.on("end", function (evt, data) {
     var message = {"position": data.position, "direction": data.direction, "angle": data.angle, "force": data.force, "distance" : data.distance};
-    phone.connection.send({'state':'end', 'joystick':message});
+    phone.connection.send({type:"user", data:{state:'end', 'joystick':message}});
 })

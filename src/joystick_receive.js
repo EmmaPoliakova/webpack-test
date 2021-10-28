@@ -6,13 +6,13 @@ import {JoystickSmartController} from "smartcontroller"
     var colours = ["red", "yellow", "green", "blue", "orange"]
     var peers = {};
     var i = 0;
+    var startx = 250;
+    var starty = 250;
 
     const simplePeer = new JoystickSmartController('123456');
     simplePeer.createQrCode('https://emmapoliakova.github.io/webpack-test/joystick.html', 'qrcode', 150, 150, '1');
 
 
-    
-   
     simplePeer.on("connection", function(data){
         data.send('hello')
 
@@ -32,9 +32,12 @@ import {JoystickSmartController} from "smartcontroller"
 
 
             if (joystick.isActive){
+                startx += joystick.lastPosition.x
+                starty += joystick.lastPosition.y
+
                 ctx.beginPath();
                 ctx.fillStyle = colours[peers[joystick.peer.peer]];
-                ctx.arc(joystick.lastPosition.x, -joystick.lastPosition.y, 10, 0, 2 * Math.PI);
+                ctx.arc(startx, -starty, 10, 0, 2 * Math.PI);
                 ctx.stroke();
                 ctx.fill(); 
             }
