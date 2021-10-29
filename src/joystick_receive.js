@@ -4,26 +4,20 @@ import {JoystickSmartController} from "smartcontroller"
     var ctx = canvas.getContext("2d");
     
     var colours = ["red", "yellow", "green", "blue", "orange"]
-    var peers = {};
-    var i = 0;
-    var startx = 250;
-    var starty = 250;
+    var coordinates = [];
 
     const simplePeer = new JoystickSmartController('123456');
     simplePeer.createQrCode('https://emmapoliakova.github.io/webpack-test/joystick.html', 'qrcode', 150, 150, '1');
 
 
     simplePeer.on("connection", function(data){
-        data.send('hello')
-
-        peers[data] = i;
-        i += 1;
+        coordinates.push([250,250])
         processData();
     })
 
 
     function processData(){
-        
+        var i = 0;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
    
         for (var key in simplePeer.joystickList){
@@ -32,16 +26,16 @@ import {JoystickSmartController} from "smartcontroller"
 
 
             if (joystick.isActive){
-                startx += joystick.lastPosition.x
-                starty += joystick.lastPosition.y
+                coordinates[i][0] += joystick.lastPosition.x
+                coordinates[i][1] += joystick.lastPosition.y
 
                 ctx.beginPath();
-                ctx.fillStyle = colours[peers[joystick.peer.peer]];
-                ctx.arc(startx, -starty, 10, 0, 2 * Math.PI);
+                ctx.fillStyle = colours[i];
+                ctx.arc(coordinates[i][0], -coordinates[i][1], 10, 0, 2 * Math.PI);
                 ctx.stroke();
                 ctx.fill(); 
             }
-
+            i += 1
         }
         requestAnimationFrame(processData);
     }
