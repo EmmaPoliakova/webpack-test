@@ -1,10 +1,10 @@
-import {TouchPadSmartController} from "smartcontroller"
+import "smartcontroller"
 
     var canvas = document.getElementById("coordinateCanvas")
     var ctx = canvas.getContext("2d");
     
     var colours = ["red", "yellow", "green", "blue", "orange"]
-    const simplePeer = new TouchPadSmartController('123456');
+    const simplePeer = new smartcontroller.TouchPadSmartController('123456');
     simplePeer.createQrCode('https://emmapoliakova.github.io/webpack-test/touchpad.html', 'qrcode');
     
     simplePeer.on("connection", function(data){
