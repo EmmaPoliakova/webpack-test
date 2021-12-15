@@ -1,8 +1,8 @@
 
 import nipplejs from 'nipplejs';
-import {SmartPhoneController} from 'smartcontroller';
+import 'smartcontroller';
  
-var phone = new SmartPhoneController();
+var phone = new smartcontroller.SmartPhoneController();
  
  var manager = nipplejs.create({
     zone: document.getElementById('zone_joystick'),

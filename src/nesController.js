@@ -1,6 +1,6 @@
-import {SmartPhoneController} from 'smartcontroller';
+import 'smartcontroller';
 
-var phone = new SmartPhoneController();
+var phone = new smartcontroller.SmartPhoneController();
 
 window.press = function (event, id){
     event.preventDefault();
