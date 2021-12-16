@@ -22,15 +22,16 @@ import "smartcontroller"
     
         ctx.clearRect(0, 0, canvas.width, canvas.height);
    
-        for (var key in simplePeer.joystickList){
+        for (var key in simplePeer.controllerList){
             
-            var joystick = simplePeer.joystickList[key]
+            var joystick = simplePeer.controllerList[key]
 
 
             if (joystick.isActive){
                 
                 coordinates[joystick.peer.peer].x += joystick.positionChange.x
                 coordinates[joystick.peer.peer].y += joystick.positionChange.y
+                console.log(coordinates)
 
                 ctx.beginPath();
                 ctx.arc(coordinates[joystick.peer.peer].x, -coordinates[joystick.peer.peer].y, 10, 0, 2 * Math.PI);
